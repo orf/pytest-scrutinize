@@ -1,6 +1,6 @@
 # pytest-scrutinize
 
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytest-scrutinize) ![PyPI - Status](https://img.shields.io/pypi/status/pytest-scrutinize) ![PyPI - Format](https://img.shields.io/pypi/format/pytest-scrutinize) ![PyPI - License](https://img.shields.io/pypi/l/pytest-scrutinize)
+![PyPI - Version](https://img.shields.io/pypi/v/pytest-scrutinize) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytest-scrutinize) ![PyPI - Status](https://img.shields.io/pypi/status/pytest-scrutinize) ![PyPI - Format](https://img.shields.io/pypi/format/pytest-scrutinize) ![PyPI - License](https://img.shields.io/pypi/l/pytest-scrutinize)
 
 Big test suites for large projects can be a pain to optimize. `pytest-scrutinize` helps you
 profile your test runs by exporting *detailed* timings as JSON for the following things:
