@@ -33,6 +33,8 @@ jobs:
 
       - name: Setup Rye
         uses: eifinger/setup-rye@v4
+        with:
+          enable-cache: true
 
       - name: Install deps
         run: rye sync
