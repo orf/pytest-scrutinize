@@ -1,3 +1,3 @@
 # pytest-scrutinize
 
-Describe your project here.
+Scrutinize your pytest test suites for slow fixtures, tests and more.
