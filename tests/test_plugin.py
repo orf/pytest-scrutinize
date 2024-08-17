@@ -181,6 +181,10 @@ def test_gc(run_tests, output_file, with_xdist):
     for gc_timing in gc_timings:
         assert_duration(gc_timing.runtime)
 
+    if with_xdist:
+        all_workers = {result.meta.worker for result in timings}
+        assert all_workers != {"master"}
+
 
 @pytest.mark.parametrize("with_query", [True, False])
 def test_django(run_tests, output_file, with_xdist, with_query):
