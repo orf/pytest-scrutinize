@@ -33,6 +33,40 @@ Run your test suite with the `--scrutinize` flag, passing a file path to write t
 pytest --scrutinize=tests.jsonl.gz
 ```
 
+## Analysing the results
+
+
+A tool to help with analysing this data is not included yet, however it can be quickly explored 
+with [DuckDB](https://duckdb.org/). For example, to find the top 10 fixtures by total duration 
+along with the number of tests that where executed:
+
+```sql
+select name,
+       to_microseconds(sum(runtime.as_microseconds)::bigint) as duration,
+       count(distinct test_id) as test_count
+from 'test-timings.jsonl'
+where type = 'fixture'
+group by all
+order by duration desc
+limit 10;
+```
+
+Or the tests with the highest number of duplicated SQL queries executed as part of it or 
+any fixture it depends on:
+
+```sql
+select test_id,
+       sum(count)               as duplicate_queries,
+       count(distinct sql_hash) as unique_queries,
+FROM (SELECT test_id, fixture_name, sql_hash, COUNT(*) AS count
+      from 'test-timings.jsonl'
+      where type = 'django-sql'
+      GROUP BY all
+      HAVING count > 1)
+group by all
+order by duplicate_queries desc limit 10;
+```
+
 ## Data captured:
 
 The resulting file will contain newline-delimited JSON objects. The Pydantic models for these 
@@ -75,37 +109,6 @@ nanoseconds, microseconds, ISO 8601 and text
 ```
 
 </details>
-
-A tool to help with analysing this data is not included yet, however it can be quickly explored 
-with [DuckDB](https://duckdb.org/). For example, to find the top 10 fixtures by total duration 
-along with the number of tests that where executed:
-
-```sql
-select name,
-       to_microseconds(sum(runtime.as_microseconds)::bigint) as duration,
-       count(distinct test_id) as test_count
-from 'test-timings.jsonl'
-where type = 'fixture'
-group by all
-order by duration desc
-limit 10;
-```
-
-Or the tests with the highest number of duplicated SQL queries executed as part of it or 
-any fixture it depends on:
-
-```sql
-select test_id,
-       sum(count)               as duplicate_queries,
-       count(distinct sql_hash) as unique_queries,
-FROM (SELECT test_id, fixture_name, sql_hash, COUNT(*) AS count
-      from 'test-timings.jsonl'
-      where type = 'django-sql'
-      GROUP BY all
-      HAVING count > 1)
-group by all
-order by duplicate_queries desc limit 10;
-```
 
 ### Fixture setup and teardown
 
