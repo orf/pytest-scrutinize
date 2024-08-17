@@ -27,7 +27,7 @@ def get_timing_items(results: list[Timing], cls: Type[T]) -> list[T]:
 def assert_duration(duration: Duration | None):
     assert duration is not None
     assert duration.as_nanoseconds != 0
-    assert duration.as_microseconds == duration.as_nanoseconds * 1_000
+    assert duration.as_nanoseconds == duration.as_microseconds * 1_000
 
 
 H = typing.TypeVar("H", bound=Hashable)
