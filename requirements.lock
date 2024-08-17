@@ -7,11 +7,13 @@
 #   all-features: false
 #   with-sources: false
 #   generate-hashes: false
-#   universal: false
+#   universal: true
 
 -e file:.
 annotated-types==0.7.0
     # via pydantic
+colorama==0.4.6 ; sys_platform == 'win32'
+    # via pytest
 iniconfig==2.0.0
     # via pytest
 packaging==24.1

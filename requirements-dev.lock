@@ -7,7 +7,7 @@
 #   all-features: false
 #   with-sources: false
 #   generate-hashes: false
-#   universal: false
+#   universal: true
 
 -e file:.
 annotated-types==0.7.0
@@ -17,6 +17,9 @@ asgiref==3.8.1
 asttokens==2.4.1
     # via devtools
     # via stack-data
+colorama==0.4.6 ; sys_platform == 'win32'
+    # via ipython
+    # via pytest
 decorator==5.1.1
     # via ipdb
     # via ipython
@@ -49,13 +52,13 @@ packaging==24.1
     # via pytest
 parso==0.8.4
     # via jedi
-pexpect==4.9.0
+pexpect==4.9.0 ; sys_platform != 'emscripten' and sys_platform != 'win32'
     # via ipython
 pluggy==1.5.0
     # via pytest
 prompt-toolkit==3.0.47
     # via ipython
-ptyprocess==0.7.0
+ptyprocess==0.7.0 ; sys_platform != 'emscripten' and sys_platform != 'win32'
     # via pexpect
 pure-eval==0.2.3
     # via stack-data
@@ -91,5 +94,7 @@ typing-extensions==4.12.2
     # via mypy
     # via pydantic
     # via pydantic-core
+tzdata==2024.1 ; sys_platform == 'win32'
+    # via django
 wcwidth==0.2.13
     # via prompt-toolkit
