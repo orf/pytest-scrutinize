@@ -3,7 +3,7 @@ name = "pytest-scrutinize"
 version = "0.1.1"
 description = "Scrutinize your pytest test suites for slow fixtures, tests and more."
 authors = [
-    { name = "Thomas Forbes", email = "tom.forbes@gitguardian.com" }
+    { name = "Thomas Forbes", email = "tom@tomforb.es" }
 ]
 dependencies = [
     "pytest>=8",
@@ -11,6 +11,23 @@ dependencies = [
 ]
 readme = "README.md"
 requires-python = ">= 3.9"
+keywords = ["pytest", "timing"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+[project.urls]
+Homepage = "https://github.com/orf/pytest-scrutinize/"
+Repository = "https://github.com/orf/pytest-scrutinize.git"
+Issues = "https://github.com/orf/pytest-scrutinize/issues"
+
 
 [build-system]
 requires = ["hatchling"]
