@@ -1,0 +1,55 @@
+[project]
+name = "pytest-scrutinize"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "Thomas Forbes", email = "tom.forbes@gitguardian.com" }
+]
+dependencies = [
+    "pytest>=8",
+    "pydantic>=2",
+]
+readme = "README.md"
+requires-python = ">= 3.9"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.entry-points.pytest11]
+pytest-scrutinize = "pytest_scrutinize.plugin"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "ipython>=8.26.0",
+    "ipdb>=0.13.13",
+    "mypy>=1.11.1",
+    "pytest-xdist>=3.6.1",
+    "pyright>=1.1.376",
+    "pytest-pretty>=1.2.0",
+    "devtools>=0.12.2",
+    "django>=5.1",
+    "pytest-django>=4.8.0",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.pytest.ini_options]
+addopts = """
+    --runpytest=subprocess
+"""
+pytester_example_dir = "tests/examples"
+norecursedirs = "tests/examples"
+
+[tool.mypy]
+plugins = [
+    "pydantic.mypy"
+]
+
+[[tool.mypy.overrides]]
+module = [
+    "xdist.workermanage",
+]
+ignore_missing_imports = true
