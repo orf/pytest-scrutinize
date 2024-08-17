@@ -20,8 +20,6 @@ def get_worker_field_default() -> str:
 class Meta(pydantic.BaseModel):
     worker: str = Field(default_factory=get_worker_field_default)
     recorded_at: datetime = Field(default_factory=now)
-
-    thread_id: int = Field(default_factory=threading.get_native_id)
     thread_name: str = Field(default_factory=lambda: threading.current_thread().name)
 
 
