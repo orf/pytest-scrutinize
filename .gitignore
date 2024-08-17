@@ -1,4 +1,5 @@
 .idea/
+test-timings.jsonl.gz
 
 # python generated files
 __pycache__/

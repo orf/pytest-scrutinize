@@ -39,6 +39,7 @@ allow-direct-references = true
 [tool.pytest.ini_options]
 addopts = """
     --runpytest=subprocess
+    --scrutinize=test-timings.jsonl.gz
 """
 pytester_example_dir = "tests/examples"
 norecursedirs = "tests/examples"
