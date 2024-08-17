@@ -41,3 +41,11 @@ jobs:
 
       - name: Run Pytest
         run: rye test
+
+      - name: Upload test timings
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-timings.jsonl.gz
+          retention-days: 1
+          path: |
+            test-timings.jsonl.gz
