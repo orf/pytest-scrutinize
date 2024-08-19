@@ -1,6 +1,6 @@
 [project]
 name = "pytest-scrutinize"
-version = "0.1.5"
+version = "0.1.6"
 description = "Scrutinize your pytest test suites for slow fixtures, tests and more."
 authors = [
     { name = "Thomas Forbes", email = "tom@tomforb.es" }
