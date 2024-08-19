@@ -30,7 +30,7 @@ pip install pytest-scrutinize
 Run your test suite with the `--scrutinize` flag, passing a file path to write to:
 
 ```
-pytest --scrutinize=tests.jsonl.gz
+pytest --scrutinize=test-timings.jsonl.gz
 ```
 
 ## Analysing the results
@@ -44,7 +44,7 @@ along with the number of tests that where executed:
 select name,
        to_microseconds(sum(runtime.as_microseconds)::bigint) as duration,
        count(distinct test_id) as test_count
-from 'test-timings.jsonl'
+from 'test-timings.jsonl.gz'
 where type = 'fixture'
 group by all
 order by duration desc
@@ -59,7 +59,7 @@ select test_id,
        sum(count)               as duplicate_queries,
        count(distinct sql_hash) as unique_queries,
 FROM (SELECT test_id, fixture_name, sql_hash, COUNT(*) AS count
-      from 'test-timings.jsonl'
+      from 'test-timings.jsonl.gz'
       where type = 'django-sql'
       GROUP BY all
       HAVING count > 1)
@@ -169,9 +169,9 @@ the raw SQL can also be captured:
 
 ```shell
 # Log the hashes of the executed SQL queries
-pytest --scrutinize=tests.jsonl.gz --scrutinize-django-sql
+pytest --scrutinize=test-timings.jsonl.gz --scrutinize-django-sql
 # Log raw SQL queries. Warning: May produce very large files!
-pytest --scrutinize=tests.jsonl.gz --scrutinize-django-sql=query
+pytest --scrutinize=test-timings.jsonl.gz --scrutinize-django-sql=query
 ```
 
 <details>
@@ -208,7 +208,7 @@ Any arbitrary Python function can be captured by passing a comma-separated strin
 
 ```shell
 # Record all boto3 clients that are created, along with their timings:
-pytest --scrutinize=tests.jsonl.gz --scrutinize-func=botocore.session.Session.create_client
+pytest --scrutinize=test-timings.jsonl.gz --scrutinize-func=botocore.session.Session.create_client
 ```
 
 <details>
@@ -243,7 +243,7 @@ along with the total time and number of objects collected. This can be used to f
 generate significant GC pressure by creating lots of circular-referenced objects:
 
 ```shell
-pytest --scrutinize=tests.jsonl.gz --scrutinize-gc
+pytest --scrutinize=test-timings.jsonl.gz --scrutinize-gc
 ```
 
 <details>
