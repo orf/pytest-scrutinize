@@ -81,13 +81,18 @@ class DjangoSQLRecorder(SingleMockRecorder):
     ) -> DjangoSQLTiming:
         # The django.db.backends.utils.CursorWrapper._execute function takes the
         # SQL as the second argument (the first being `self`):
-        query: str = args[1]
-        sql_hash = hashlib.sha256(query.encode(), usedforsecurity=False).hexdigest()
+        query: str | bytes = args[1]
+        query_str = query
+        if isinstance(query, str):
+            query = query.encode()
+        else:
+            query_str = query.decode()
+        sql_hash = hashlib.sha256(query, usedforsecurity=False).hexdigest()
 
         sql = None
         if self.mode == "query":
-            # Hash it:
-            sql = query
+            # Include the full query here
+            sql = query_str
         return DjangoSQLTiming(
             fixture_name=fixture_name,
             runtime=elapsed,
