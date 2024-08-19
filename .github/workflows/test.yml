@@ -48,7 +48,7 @@ jobs:
         run: rye sync
 
       - name: Setup Pytest
-        run: rye install --force "pytest~=${{ matrix.pytest }}"
+        run: rye install --force "pytest~=${{ matrix.pytest }}.0"
 
       - name: Run Pytest
         run: rye test
@@ -56,7 +56,7 @@ jobs:
       - name: Upload test timings
         uses: actions/upload-artifact@v4
         with:
-          name: test-timings-${{ matrix.python }}
+          name: test-timings-${{ matrix.python }}-${{ matrix.pytest }}
           retention-days: 1
           path: |
             test-timings.jsonl.gz
