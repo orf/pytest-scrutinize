@@ -36,7 +36,7 @@ class TimingsOutputFile:
         if self.fd is not None:
             raise RuntimeError("Output file already opened")
 
-        with gzip.open(self.path, mode="wt", compresslevel=1) as fd:
+        with gzip.open(self.path, mode="wt", compresslevel=6) as fd:
             self.fd = fd
             try:
                 yield fd
