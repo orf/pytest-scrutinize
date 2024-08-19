@@ -1,13 +1,13 @@
 [project]
 name = "pytest-scrutinize"
-version = "0.1.3"
+version = "0.1.4"
 description = "Scrutinize your pytest test suites for slow fixtures, tests and more."
 authors = [
     { name = "Thomas Forbes", email = "tom@tomforb.es" }
 ]
 dependencies = [
     "pytest>=6",
-    "pydantic>=2",
+    "pydantic>=2,<=3",
 ]
 readme = "README.md"
 requires-python = ">= 3.9"
@@ -39,6 +39,8 @@ pytest-scrutinize = "pytest_scrutinize.plugin"
 
 [tool.rye]
 managed = true
+universal = true
+generate-hashes = true
 dev-dependencies = [
     "ipython>=8.26.0",
     "ipdb>=0.13.13",
