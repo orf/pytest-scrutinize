@@ -24,6 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         python: [ "3.9", "3.10", "3.11", "3.12" ]
+        pytest: [ "6", "7", "8" ]
 
     steps:
       - uses: actions/checkout@v4
@@ -45,6 +46,9 @@ jobs:
 
       - name: Install deps
         run: rye sync
+
+      - name: Setup Pytest
+        run: rye install --force "pytest~=${{ matrix.pytest }}"
 
       - name: Run Pytest
         run: rye test
