@@ -12,8 +12,8 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
       - uses: pre-commit/action@v3.0.1
 
   test:
@@ -27,10 +27,10 @@ jobs:
         pytest: [ "6", "7", "8" ]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           cache: pip
           cache-dependency-path: requirements-dev.lock
